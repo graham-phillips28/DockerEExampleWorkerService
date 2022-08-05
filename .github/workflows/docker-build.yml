@@ -13,4 +13,4 @@ jobs:
 
       - name: docker build app
         run: |
-          docker build . -t graham28ppb/example1
+          docker build ./DockerExampleWorkerService -t graham28ppb/example1
