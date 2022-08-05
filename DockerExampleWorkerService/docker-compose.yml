@@ -4,8 +4,18 @@ services:
     container_name: worker-service
     image: mcr.microsoft.com/dotnet/sdk:6.0
     volumes:
-      - ./:/graham
-    working_dir: /graham
+      - ./:/MakeUpAFolderName
+    working_dir: /MakeUpAFolderName
     command: "dotnet run"
     ports:
       - "8001:8081"
+
+  integration-tests:
+      container_name: integration-tests
+      image: mcr.microsoft.com/dotnet/sdk:6.0
+      volumes:
+        - ../TestProject:/test
+      working_dir: /test
+      command: "dotnet test TestProject.csproj "
+      depends_on:
+        - worker-service

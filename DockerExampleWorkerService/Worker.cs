@@ -12,13 +12,17 @@ namespace DockerExampleWorkerService
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
             // TODO: implement single execution logic here.
-            _logger.LogInformation(
+            while(!stoppingToken.IsCancellationRequested)
+            {
+                _logger.LogInformation(
                 "Worker running at: {time}", DateTimeOffset.Now);
 
-            await Task.Delay(1000, stoppingToken);
+                await Task.Delay(1000, stoppingToken);
+            }
+            
 
             // When completed, the entire app host will stop.
-            _hostApplicationLifetime.StopApplication();
+            //_hostApplicationLifetime.StopApplication();
         }
     }
 }
